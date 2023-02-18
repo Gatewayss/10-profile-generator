@@ -1,7 +1,10 @@
 const inquirer = require('inquirer');
+const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer')
 
-const questions = [
+
+const managerQuestions = [
     {
         name: 'managerName',
         message: "What is the team manager's name?",
@@ -80,18 +83,25 @@ function jobTitle(memberType) {
     switch (memberType) {
         case 'Engineer':
             inquirer.prompt(engineerQuestions)
-            .then((answers) => { console.log(answers) })
+                .then((answers) => {
+                    const { engineerName, engineerId, engineerEmail, github } = answers
+                    new Engineer( engineerName, engineerId, engineerEmail, github )
+                })
             break;
         case 'Intern':
             inquirer.prompt(internQuestions)
-            .then((answers) => { console.log(answers) })
+                .then((answers) => {
+                    const { internName, internId, internEmail, school } = answers
+                    new Employee( internName, internId, internEmail)
+                    // console.log(employeeInfo);
+                })
             break;
         default: return console.log("No more employees were added.");
     }
 }
 
 function init() {
-    return inquirer.prompt(questions)
+    return inquirer.prompt(managerQuestions)
         .then((answers) => {
             const { managerName, managerId, managerEmail, managerNumber, memberType } = answers
             newTeamManager = new Manager(managerName, managerId, managerEmail, managerNumber)
