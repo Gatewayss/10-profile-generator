@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern');
 
 
 const managerQuestions = [
@@ -92,8 +93,8 @@ function jobTitle(memberType) {
             inquirer.prompt(internQuestions)
                 .then((answers) => {
                     const { internName, internId, internEmail, school } = answers
-                    new Employee( internName, internId, internEmail)
-                    // console.log(employeeInfo);
+                    // new Employee( internName, internId, internEmail)
+                    new Intern(internName, internId, internEmail, school)
                 })
             break;
         default: return console.log("No more employees were added.");
