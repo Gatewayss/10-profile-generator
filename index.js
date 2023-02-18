@@ -26,13 +26,16 @@ const managerQuestions = [
         message: "What is the team member's office number?",
         type: 'input'
     },
+];
+
+const teamMemberTypeQuestion = [
     {
         name: 'memberType',
         message: 'What type of team member would you like to add?',
         choices: ['Engineer', 'Intern', 'None'],
         type: 'list'
     }
-];
+]
 
 const engineerQuestions = [
     {
@@ -80,33 +83,41 @@ const internQuestions = [
     }
 ];
 
-function jobTitle(memberType) {
-    switch (memberType) {
+function jobTitle(answers) {
+    switch (answers.memberType) {
         case 'Engineer':
             inquirer.prompt(engineerQuestions)
                 .then((answers) => {
                     const { engineerName, engineerId, engineerEmail, github } = answers
-                    new Engineer( engineerName, engineerId, engineerEmail, github )
+                    new Engineer(engineerName, engineerId, engineerEmail, github)
+                    teamMemberType()
                 })
             break;
         case 'Intern':
             inquirer.prompt(internQuestions)
                 .then((answers) => {
                     const { internName, internId, internEmail, school } = answers
-                    // new Employee( internName, internId, internEmail)
                     new Intern(internName, internId, internEmail, school)
+                    teamMemberType()
                 })
             break;
         default: return console.log("No more employees were added.");
     }
 }
 
+function teamMemberType() {
+    return inquirer.prompt(teamMemberTypeQuestion)
+        .then((answers) => {
+            jobTitle(answers)
+        })
+}
+
 function init() {
     return inquirer.prompt(managerQuestions)
         .then((answers) => {
-            const { managerName, managerId, managerEmail, managerNumber, memberType } = answers
+            const { managerName, managerId, managerEmail, managerNumber } = answers
             newTeamManager = new Manager(managerName, managerId, managerEmail, managerNumber)
-            jobTitle(memberType)
+            teamMemberType()
         })
 };
 
