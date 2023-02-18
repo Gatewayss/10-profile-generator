@@ -32,17 +32,17 @@ const questions = [
 
 const engineerQuestions = [
     {
-        name: 'engName',
+        name: 'engineerName',
         message: "What is the engineers name?",
         type: 'input'
     },
     {
-        name: 'engId',
+        name: 'engineerId',
         message: "What is the engineers ID?",
         type: 'input'
     },
     {
-        name: 'engEmail',
+        name: 'engineerEmail',
         message: "What is the engineers email address?",
         type: 'input'
     },
