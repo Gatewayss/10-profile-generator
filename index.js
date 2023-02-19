@@ -3,6 +3,8 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern');
+const generateHTML = require('./src/template');
+const employees = [];
 
 // Questions for the team manager
 const managerQuestions = [
@@ -95,7 +97,11 @@ function jobTitle(answers) {
                 .then((answers) => {
                     // Create a new instance of the Engineer class with the provided answers
                     const { engineerName, engineerId, engineerEmail, github } = answers
-                    new Engineer(engineerName, engineerId, engineerEmail, github)
+                    const newEngineer = new Engineer(engineerName, engineerId, engineerEmail, github)
+                    // Adds new engineer to array 
+                    employees.push(newEngineer)
+                    // Passes new employee array to be generated 
+                    generateHTML(employees)
                     // Prompt for information about the next team member
                     teamMemberType()
                 })
@@ -106,7 +112,11 @@ function jobTitle(answers) {
                 .then((answers) => {
                     // Create a new instance of the Intern class with the provided answers
                     const { internName, internId, internEmail, school } = answers
-                    new Intern(internName, internId, internEmail, school)
+                    const newIntern = new Intern(internName, internId, internEmail, school)
+                    // Adds new intern to array 
+                    employees.push(newIntern)
+                    // Passes new employee array to be generated 
+                    generateHTML(employees)
                     // Prompt for information about the next team member
                     teamMemberType()
                 })
@@ -130,9 +140,15 @@ function init() {
             const { managerName, managerId, managerEmail, managerNumber } = answers
             // Creates a instance of a the manager class with the provided answers
             newTeamManager = new Manager(managerName, managerId, managerEmail, managerNumber)
+            // Adds teams manager to array
+            employees.push(newTeamManager)
+            // Passes new employee array to be generated 
+            generateHTML(employees)
             // Prompts the team member type they wish to add 
             teamMemberType()
         })
 };
+
+module.export = employees
 
 init();
