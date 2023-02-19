@@ -1,4 +1,6 @@
 // Import the inquirer library and the Manager, Engineer, and Intern classes
+const fs = require('fs');
+// const { writeToFile } = require('./src/template');
 const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer')
@@ -121,9 +123,24 @@ function jobTitle(answers) {
                     teamMemberType()
                 })
             break;
-        default: return console.log("No more employees were added.");
+        default: 
+        // Once user is done adding employees the html file is rendered 
+        console.log("\nNo more employees were added.\n");
+        const test = generateHTML(employees)
+        writeToFile('index.html', test)
+        
     }
 }
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => {
+        if (err)
+            console.log(err);
+        else {
+            console.log("\nFile written successfully\n");
+        }
+    })
+};
 
 // Takes the team member type tp trigger the correct questions
 function teamMemberType() {
@@ -149,6 +166,6 @@ function init() {
         })
 };
 
-module.export = employees
+module.exports = employees
 
 init();
