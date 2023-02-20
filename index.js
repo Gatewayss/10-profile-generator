@@ -123,7 +123,6 @@ function jobTitle(answers) {
         // Once user is done adding employees the html file is rendered 
         console.log("\nNo more employees were added.\n");
         const text = generateHTML(employees)
-        console.log(text);
         writeToFile('./dist/index.html', text)
         
     }

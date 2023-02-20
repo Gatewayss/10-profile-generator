@@ -10,6 +10,7 @@ function generateHTML(employees) {
           <h1>Our Team</h1>
         </div>
         </header>
+          <div class="container">
   `;
 
     employees.forEach(employee => {
@@ -41,6 +42,7 @@ function generateHTML(employees) {
     });
 
     html += `
+    </div>
     </body>
     </html>
   `;
