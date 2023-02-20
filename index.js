@@ -102,8 +102,6 @@ function jobTitle(answers) {
                     const newEngineer = new Engineer(engineerName, engineerId, engineerEmail, github)
                     // Adds new engineer to array 
                     employees.push(newEngineer)
-                    // Passes new employee array to be generated 
-                    generateHTML(employees)
                     // Prompt for information about the next team member
                     teamMemberType()
                 })
@@ -117,8 +115,6 @@ function jobTitle(answers) {
                     const newIntern = new Intern(internName, internId, internEmail, school)
                     // Adds new intern to array 
                     employees.push(newIntern)
-                    // Passes new employee array to be generated 
-                    generateHTML(employees)
                     // Prompt for information about the next team member
                     teamMemberType()
                 })
@@ -126,8 +122,9 @@ function jobTitle(answers) {
         default: 
         // Once user is done adding employees the html file is rendered 
         console.log("\nNo more employees were added.\n");
-        const test = generateHTML(employees)
-        writeToFile('index.html', test)
+        const text = generateHTML(employees)
+        console.log(text);
+        writeToFile('./dist/index.html', text)
         
     }
 }
@@ -160,7 +157,7 @@ function init() {
             // Adds teams manager to array
             employees.push(newTeamManager)
             // Passes new employee array to be generated 
-            generateHTML(employees)
+            // generateHTML(employees)
             // Prompts the team member type they wish to add 
             teamMemberType()
         })
