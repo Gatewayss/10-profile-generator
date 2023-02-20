@@ -10,4 +10,9 @@ describe('Engineer class', () => {
         const actual = testEngineer.getGithub()
         expect(actual).toEqual(expected)
     });
+    it('should return Engineer as job role', () => {
+        const expected = 'Engineer'
+        const actual = testEngineer.getRole()
+        expect(actual).toEqual(expected)
+    })
 });
