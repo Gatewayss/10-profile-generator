@@ -133,7 +133,7 @@ function writeToFile(fileName, data) {
         if (err)
             console.log(err);
         else {
-            console.log("\nFile written successfully\n");
+            console.log("File written successfully\n");
         }
     })
 };
