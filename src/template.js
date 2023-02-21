@@ -26,7 +26,7 @@ function generateHTML(employees) {
         <p>${role}</p>
         <span class="border divide"></span>
         <p>ID: ${id}</p>
-        <p>Email: ${email}</p>
+        <p>Email: <a href="mailto:${email}">${email}</a></p>
         `
 
     switch (role) {
@@ -34,7 +34,7 @@ function generateHTML(employees) {
         html += `<p>Number: ${number}</p></div>`
         break;
       case 'Engineer': const github = employee.getGithub();
-        html += `<p>Github: ${github}</p></div>`
+        html += `<p>Github: <a href="https://github.com/${github}">${github}</a></p></div>`
         break;
       case 'Intern': const school = employee.getSchool();
         html += `<p>School: ${school}</p></div>`
